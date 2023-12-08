@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cc4da8e26cf2b44499676e2313e8796, type: 3}
   m_Name: Red
   m_EditorClassIdentifier: 
-  EnemyTypeId: 0
-  MoveSpeed: 4
+  EnemyTypeId: 10
+  SpawnWeight: 4
+  MoveSpeed: 2
   Hp: 50
   PowerPoints: 15
   Prefab: {fileID: 7089399884110402214, guid: 0558f9976d8cd4146b0f1fa98dac3623, type: 3}

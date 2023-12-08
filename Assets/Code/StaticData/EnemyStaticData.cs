@@ -7,6 +7,9 @@ namespace Code.StaticData
     {
         public EnemyTypeId EnemyTypeId;
 
+        [Range(1, 10)]
+        public int SpawnWeight;
+
         [Range(0.5f, 5.0f)]
         public float MoveSpeed;
 
