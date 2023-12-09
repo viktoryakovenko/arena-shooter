@@ -1,17 +1,15 @@
 using Code.Logic;
-using Code.StaticData;
 using System;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Hero
 {
     public class HeroHealth : MonoBehaviour, IHealth
     {
-        public event Action HealthChanged;
+        public event Action StateChanged;
 
-        private float _currentHp;
-        private float _maxHp;
+        [SerializeField] private float _currentHp;
+        [SerializeField] private float _maxHp;
 
         public float Current
         {
@@ -22,7 +20,7 @@ namespace Code.Hero
                 {
                     _currentHp = value;
 
-                    HealthChanged?.Invoke();
+                    StateChanged?.Invoke();
                 }
             }
         }
@@ -31,14 +29,6 @@ namespace Code.Hero
         {
             get => _maxHp;
             set => _maxHp = value;
-        }
-
-        [Inject]
-        private void Construct(HeroStaticData staticData)
-        {
-            _maxHp = staticData.MaxHealth;
-            _currentHp = staticData.MaxHealth;
-            HealthChanged?.Invoke();
         }
 
         public void TakeDamage(float amount)

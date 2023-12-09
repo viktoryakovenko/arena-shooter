@@ -1,4 +1,3 @@
-using Code.StaticData;
 using UnityEngine;
 using Zenject;
 
@@ -7,15 +6,15 @@ namespace Code.Hero
     [RequireComponent(typeof(CharacterController))]
     public class HeroMovement : MonoBehaviour
     { 
-        private float _movementSpeed;
+        public float MovementSpeed;
+
         private InputActions _actions;
         private CharacterController _characterController;
 
         [Inject]
-        private void Construct(InputActions actions, HeroStaticData staticData)
+        private void Construct(InputActions actions)
         {
             _actions = actions;
-            _movementSpeed = staticData.MoveSpeed;
         }
 
         private void Awake()
@@ -36,7 +35,7 @@ namespace Code.Hero
         private void Update()
         {
             Vector2 direction = _actions.Player.Move.ReadValue<Vector2>();
-            float scaledMoveSpeed = _movementSpeed * Time.deltaTime;
+            float scaledMoveSpeed = MovementSpeed * Time.deltaTime;
 
             Vector3 offset = transform.rotation * new Vector3(direction.x, 0, direction.y) * scaledMoveSpeed;
 

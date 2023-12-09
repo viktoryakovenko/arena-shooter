@@ -1,16 +1,15 @@
-using Code.StaticData;
+using Code.Logic;
 using System;
 using UnityEngine;
-using Zenject;
 
 namespace Code.Hero
 {
-    public class HeroPower : MonoBehaviour
+    public class KillAllPower : MonoBehaviour, IPower
     {
-        public event Action PowerChanged;
+        public event Action StateChanged;
 
-        private float _currentPower;
-        private float _maxPower;
+        [SerializeField] private float _currentPower;
+        [SerializeField] private float _maxPower;
 
         public float Current
         {
@@ -21,7 +20,7 @@ namespace Code.Hero
                 {
                     _currentPower = value;
 
-                    PowerChanged?.Invoke();
+                    StateChanged?.Invoke();
                 }
             }
         }
@@ -32,15 +31,14 @@ namespace Code.Hero
             set => _maxPower = value;
         }
 
-        [Inject]
-        private void Construct(HeroStaticData staticData)
+        public void AddPower(int amount)
         {
-            _currentPower = staticData.CurrentPower;
-            _maxPower = staticData.MaxPower;
-            PowerChanged?.Invoke();
+            if (Current <= 0) return;
+
+            Current += amount;
         }
 
-        public void TakeDamage(float amount)
+        public void RemovePower(int amount)
         {
             if (Current <= 0) return;
 

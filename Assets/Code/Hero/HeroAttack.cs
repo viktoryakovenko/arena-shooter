@@ -1,18 +1,18 @@
-using Code.StaticData;
+using Code.Logic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
 public class HeroAttack : MonoBehaviour
 {
+    public float Damage;
+
     private InputActions _actions;
-    private float _damage;
 
     [Inject]
-    private void Construct(InputActions actions, HeroStaticData staticData)
+    private void Construct(InputActions actions)
     {
         _actions = actions;
-        _damage = staticData.Damage;
     }
 
     private void OnEnable()
@@ -22,7 +22,6 @@ public class HeroAttack : MonoBehaviour
         _actions.Player.Fire2.started += Ultimate;
     }
 
-
     private void OnDisable()
     {
         _actions.Disable();
@@ -31,7 +30,9 @@ public class HeroAttack : MonoBehaviour
     }
     private void Attack(InputAction.CallbackContext context)
     {
-        Debug.Log(_damage);
+        var health = GetComponent<IHealth>();
+        health.TakeDamage(Damage);
+        Debug.Log(health.Current);
     }
 
     private void Ultimate(InputAction.CallbackContext context)

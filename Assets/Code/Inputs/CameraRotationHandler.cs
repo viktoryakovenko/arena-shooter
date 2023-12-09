@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
@@ -7,7 +6,7 @@ namespace Code.Inputs
 {
     public class CameraRotationHandler : MonoBehaviour
     {
-        [SerializeField, Range(0, 100)] private float _sensitivity = 50f;
+        [field: SerializeField] public float Sensitivity { get; set; }
         [SerializeField] private Transform _rotationTarget;
         [SerializeField] private float _minVerticalAngle = -30f;
         [SerializeField] private float _maxVerticalAngle = 30f;
@@ -37,8 +36,8 @@ namespace Code.Inputs
             var delta = context.action.ReadValue<Vector2>();
             var deltaTime = Time.deltaTime;
 
-            _vertical -= _sensitivity * delta.y * deltaTime;
-            _horizontal += _sensitivity * delta.x * deltaTime;
+            _vertical -= Sensitivity * delta.y * deltaTime;
+            _horizontal += Sensitivity * delta.x * deltaTime;
 
             gameObject.transform.eulerAngles = new Vector3(0f, _horizontal, 0f);
 

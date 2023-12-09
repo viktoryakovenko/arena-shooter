@@ -6,7 +6,7 @@ namespace Code.Enemy
 {
     public class EnemyHealth : MonoBehaviour, IHealth
     {
-        public event Action HealthChanged;
+        public event Action StateChanged;
 
         [SerializeField] private float _current;
         [SerializeField] private float _max;
@@ -27,7 +27,7 @@ namespace Code.Enemy
         {
             Current -= amount;
 
-            HealthChanged?.Invoke();
+            StateChanged?.Invoke();
         }
     }
 }

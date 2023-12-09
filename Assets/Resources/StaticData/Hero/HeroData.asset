@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b37711d4fe748234b9e41d08de3aa53d, type: 3}
   m_Name: HeroData
   m_EditorClassIdentifier: 
-  MaxHealth: 100
+  Sensitivity: 75
   MoveSpeed: 1
+  MaxHealth: 100
   Damage: 50
   MaxPower: 100
   CurrentPower: 50
