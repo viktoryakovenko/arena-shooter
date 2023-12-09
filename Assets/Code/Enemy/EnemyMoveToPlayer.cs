@@ -1,3 +1,4 @@
+using Code.Hero;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -11,8 +12,8 @@ namespace Code.Enemy
         private Transform _heroTransform;
 
         [Inject]
-        public void Construct(Transform heroTransform) =>
-            _heroTransform = heroTransform;
+        public void Construct(HeroMovement heroMovement) =>
+            _heroTransform = heroMovement.transform;
 
         private void Update() =>
             SetDestinationForAgent();

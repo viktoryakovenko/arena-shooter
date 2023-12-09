@@ -9,6 +9,6 @@ namespace Code.Logic
         float Current { get; set; }
         float Max { get; set; }
 
-        void TakeDamage(float damage);
+        void TakeDamage(float amount);
     }
 }

@@ -1,20 +1,21 @@
+using Code.StaticData;
 using UnityEngine;
 using Zenject;
 
-namespace Code.Inputs
+namespace Code.Hero
 {
     [RequireComponent(typeof(CharacterController))]
     public class HeroMovement : MonoBehaviour
-    {
-        [SerializeField] private int _movementSpeed;
-
+    { 
+        private float _movementSpeed;
         private InputActions _actions;
         private CharacterController _characterController;
 
         [Inject]
-        private void Construct(InputActions actions)
+        private void Construct(InputActions actions, HeroStaticData staticData)
         {
             _actions = actions;
+            _movementSpeed = staticData.MoveSpeed;
         }
 
         private void Awake()
