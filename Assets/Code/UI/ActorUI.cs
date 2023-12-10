@@ -3,22 +3,22 @@ using UnityEngine;
 
 namespace Code.UI
 {
-    public class ActorUI : MonoBehaviour
+    public class ActorUI<TState> : MonoBehaviour where TState : IUnitState 
     {
         public StatBar Bar;
 
-        private IUnitState _state;
+        private TState _state;
 
-        public void Construct(IUnitState state)
+        public void Construct(TState state)
         {
             _state = state;
 
-            _state.StateChanged += UpdateBar;
-
             UpdateBar();
+
+            _state.StateChanged += UpdateBar;
         }
 
-        private void OnDestroy()
+        private void OnDisable()
         {
             _state.StateChanged -= UpdateBar;
         }

@@ -17,21 +17,13 @@ namespace Code.Infrastructure.Installers
 
             BindFactory();
             BindPlayer();
-            BindUI();
-        }
-
-        private void BindUI()
-        {
-            var heroHealth = Container.Resolve<HeroMovement>().GetComponent<IHealth>();
-            var heroPower = Container.Resolve<HeroMovement>().GetComponent<IPower>();
-            var hud = Container.Resolve<GameFactory>().CreateHud(heroHealth);
-
-            var instantiatedHud = Container.InstantiatePrefab(hud);
         }
 
         private void BindPlayer()
         {
             var hero = Container.Resolve<GameFactory>().CreateHero(_startPoint);
+
+            BindUIForPlayer(hero.GetComponent<IHealth>(), hero.GetComponent<IPower>());
 
             var instantiatedHero = Container.InstantiatePrefab(hero);
 
@@ -40,6 +32,12 @@ namespace Code.Infrastructure.Installers
                 .FromInstance(instantiatedHero.GetComponent<HeroMovement>())
                 .AsSingle()
                 .NonLazy();
+
+        }
+
+        private void BindUIForPlayer(IHealth health, IPower power)
+        {
+            var hud = Container.Resolve<GameFactory>().CreateHud(health, power);
         }
 
         private void BindFactory()

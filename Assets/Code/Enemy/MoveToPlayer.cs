@@ -1,13 +1,14 @@
 using Code.Hero;
 using UnityEngine;
-using UnityEngine.AI;
 using Zenject;
 
 namespace Code.Enemy
 {
-    public class EnemyMoveToPlayer : Follow
+    public class MoveToPlayer : MonoBehaviour
     {
-        [SerializeField] private NavMeshAgent _agent;
+        [SerializeField] private float _moveSpeed;
+
+        public float MoveSpeed => _moveSpeed;
 
         private Transform _heroTransform;
 
@@ -20,8 +21,7 @@ namespace Code.Enemy
 
         private void SetDestinationForAgent()
         {
-            if (_heroTransform)
-                _agent.destination = _heroTransform.position;
+            Vector3.MoveTowards(transform.position, _heroTransform.position, _moveSpeed * Time.deltaTime);
         }
     }
 }

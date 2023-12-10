@@ -32,7 +32,6 @@ public class HeroAttack : MonoBehaviour
     {
         var health = GetComponent<IHealth>();
         health.TakeDamage(Damage);
-        Debug.Log(health.Current);
     }
 
     private void Ultimate(InputAction.CallbackContext context)

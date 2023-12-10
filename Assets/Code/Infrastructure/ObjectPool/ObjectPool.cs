@@ -5,10 +5,9 @@ using Object = UnityEngine.Object;
 
 public class ObjectPool<TMono> where TMono : MonoBehaviour
 {
+    public bool AutoExpand { get; set; }
+    public Transform Contrainer;
     public TMono Prefab => _prefab;
-
-    [SerializeField] private bool _autoExpand { get; set; }
-    [SerializeField] private Transform _contrainer;
 
     private List<TMono> _pool;
     private TMono _prefab;
@@ -16,14 +15,14 @@ public class ObjectPool<TMono> where TMono : MonoBehaviour
     public ObjectPool(TMono prefab, int count)
     {
         _prefab = prefab;
-        _contrainer = null;
+        Contrainer = null;
 
         CreatePool(count);
     }
 
     public ObjectPool(TMono prefab, int count, Transform contrainer)
     {
-        _contrainer = contrainer;
+        Contrainer = contrainer;
         _prefab = prefab;
 
         CreatePool(count);
@@ -50,7 +49,7 @@ public class ObjectPool<TMono> where TMono : MonoBehaviour
         if (HasFreeElement(out TMono freeElement))
             return freeElement;
 
-        if (_autoExpand)
+        if (AutoExpand)
             return CreateObject(true);
 
         throw new Exception($"There is no free elements in pool of type {typeof(TMono)}");
@@ -68,7 +67,7 @@ public class ObjectPool<TMono> where TMono : MonoBehaviour
 
     private TMono CreateObject(bool isActiveByDefault = false)
     {
-        TMono createdObject = Object.Instantiate(_prefab, _contrainer);
+        TMono createdObject = Object.Instantiate(_prefab, Contrainer);
         createdObject.gameObject.SetActive(isActiveByDefault);
         _pool.Add(createdObject);
         return createdObject;
