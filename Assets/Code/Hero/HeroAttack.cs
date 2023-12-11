@@ -28,6 +28,7 @@ public class HeroAttack : MonoBehaviour
         _actions.Player.Fire.started -= Attack;
         _actions.Player.Fire2.started -= Ultimate;
     }
+
     private void Attack(InputAction.CallbackContext context)
     {
         var health = GetComponent<IHealth>();
@@ -38,5 +39,4 @@ public class HeroAttack : MonoBehaviour
     {
         Debug.Log("Ultimate!");
     }
-
 }

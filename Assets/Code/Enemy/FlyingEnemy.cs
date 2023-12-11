@@ -3,23 +3,15 @@ using UnityEngine;
 
 namespace Code.Enemy
 {
-    [RequireComponent(typeof(MoveToPlayer))]
     public class FlyingEnemy : MonoBehaviour
     {
         [SerializeField] private float _freezeTime;
         [SerializeField] private float _flyHeight;
 
-        private MoveToPlayer _moveToPlayer;
-
-        private void Awake()
-        {
-            _moveToPlayer = GetComponent<MoveToPlayer>();
-        }
-
         private void Start()
         {
             transform
-                .DOMoveY(transform.position.y + _flyHeight, _moveToPlayer.MoveSpeed)
+                .DOMoveY(transform.position.y + _flyHeight, 0.01f)
                 .SetSpeedBased()
                 .SetEase(Ease.Linear)
                 .OnComplete(Wait);

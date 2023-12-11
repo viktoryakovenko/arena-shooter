@@ -12,8 +12,6 @@ namespace Code.Infrastructure.Factory
     {
         private readonly HeroStaticData _heroData;
 
-        private GameObject _hero;
-
         public GameFactory(HeroStaticData heroData)
         {
             _heroData = heroData;

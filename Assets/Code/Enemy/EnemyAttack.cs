@@ -4,8 +4,16 @@ namespace Code.Enemy
 {
     public class EnemyAttack : MonoBehaviour
     {
-        [SerializeField] private float _damage = 15;
+        public float Damage { get; set; }
 
+        private void Update()
+        {
+            Attack();
+        }
 
+        private void Attack()
+        {
+
+        }
     }
 }

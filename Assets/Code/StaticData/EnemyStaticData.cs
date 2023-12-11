@@ -13,6 +13,9 @@ namespace Code.StaticData
         [Range(0.5f, 5.0f)]
         public float MoveSpeed;
 
+        [Range(0f, 50f)]
+        public int Damage;
+
         [Range(1, 100)]
         public int Hp;
 

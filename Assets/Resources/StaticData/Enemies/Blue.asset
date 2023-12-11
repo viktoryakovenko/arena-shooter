@@ -13,7 +13,9 @@ MonoBehaviour:
   m_Name: Blue
   m_EditorClassIdentifier: 
   EnemyTypeId: 0
+  SpawnWeight: 10
   MoveSpeed: 0
+  Damage: 25
   Hp: 100
   PowerPoints: 50
-  Prefab: {fileID: 4190091162250331246, guid: 0a62fc485a21bd04083c21a16987c567, type: 3}
+  Prefab: {fileID: 6071047450864795913, guid: 723f52dcc2d342b4196ba3398d1f7d36, type: 3}

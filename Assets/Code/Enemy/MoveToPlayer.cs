@@ -6,22 +6,20 @@ namespace Code.Enemy
 {
     public class MoveToPlayer : MonoBehaviour
     {
-        [SerializeField] private float _moveSpeed;
-
-        public float MoveSpeed => _moveSpeed;
+        public float MoveSpeed { get; set; }
 
         private Transform _heroTransform;
 
         [Inject]
         public void Construct(HeroMovement heroMovement) =>
-            _heroTransform = heroMovement.transform;
+            _heroTransform = heroMovement.gameObject.transform;
 
         private void Update() =>
             SetDestinationForAgent();
 
         private void SetDestinationForAgent()
         {
-            Vector3.MoveTowards(transform.position, _heroTransform.position, _moveSpeed * Time.deltaTime);
+            //Vector3.MoveTowards(transform.position, _heroTransform.position, MoveSpeed * Time.deltaTime);
         }
     }
 }

@@ -44,6 +44,5 @@ namespace Code.Inputs
             _vertical = Mathf.Clamp(_vertical, _minVerticalAngle, _maxVerticalAngle);
             _rotationTarget.eulerAngles = new Vector3(_vertical, _horizontal, 0f);
         }
-
     }
 }

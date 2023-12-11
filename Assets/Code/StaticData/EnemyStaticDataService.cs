@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Code.StaticData
 {
-    public class StaticDataService : MonoBehaviour
+    public class EnemyStaticDataService
     {
         Dictionary<EnemyTypeId, EnemyStaticData> _enemies;
 
