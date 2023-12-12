@@ -3,40 +3,44 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using Zenject;
 
-public class HeroAttack : MonoBehaviour
+namespace Code.Hero
 {
-    public float Damage;
-
-    private InputActions _actions;
-
-    [Inject]
-    private void Construct(InputActions actions)
+    [AddComponentMenu("Hero/Attack")]
+    public class HeroAttack : MonoBehaviour
     {
-        _actions = actions;
-    }
+        public float Damage;
 
-    private void OnEnable()
-    {
-        _actions.Enable();
-        _actions.Player.Fire.started += Attack;
-        _actions.Player.Fire2.started += Ultimate;
-    }
+        private InputActions _actions;
 
-    private void OnDisable()
-    {
-        _actions.Disable();
-        _actions.Player.Fire.started -= Attack;
-        _actions.Player.Fire2.started -= Ultimate;
-    }
+        [Inject]
+        private void Construct(InputActions actions)
+        {
+            _actions = actions;
+        }
 
-    private void Attack(InputAction.CallbackContext context)
-    {
-        var health = GetComponent<IHealth>();
-        health.TakeDamage(Damage);
-    }
+        private void OnEnable()
+        {
+            _actions.Enable();
+            _actions.Player.Fire.started += Attack;
+            _actions.Player.Fire2.started += Ultimate;
+        }
 
-    private void Ultimate(InputAction.CallbackContext context)
-    {
-        Debug.Log("Ultimate!");
+        private void OnDisable()
+        {
+            _actions.Disable();
+            _actions.Player.Fire.started -= Attack;
+            _actions.Player.Fire2.started -= Ultimate;
+        }
+
+        private void Attack(InputAction.CallbackContext context)
+        {
+            var health = GetComponent<IHealth>();
+            health.TakeDamage(Damage);
+        }
+
+        private void Ultimate(InputAction.CallbackContext context)
+        {
+            Debug.Log("Ultimate!");
+        }
     }
 }

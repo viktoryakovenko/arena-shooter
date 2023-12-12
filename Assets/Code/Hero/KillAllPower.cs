@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Code.Hero
 {
+    [AddComponentMenu("Hero/KillAll Power")]
     public class KillAllPower : MonoBehaviour, IPower
     {
         public event Action StateChanged;

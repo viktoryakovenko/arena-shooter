@@ -1,41 +1,41 @@
-/*using System;
+using Code.Infrastructure.Factory;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
-public class ObjectPool<TMono> where TMono : MonoBehaviour
+public class ObjectPool
 {
-    public bool AutoExpand { get; set; }
-    public Transform Contrainer;
-    public TMono Prefab => _prefab;
+    public bool AutoExpand { get; set; } = false;
 
-    private List<TMono> _pool;
-    private TMono _prefab;
+    private List<GameObject> _pool;
+    private IFactory _factory;
 
-    public ObjectPool(TMono prefab, int count)
+    public ObjectPool(IFactory factory, int count)
     {
-        _prefab = prefab;
-        Contrainer = null;
+        _factory = factory;
 
         CreatePool(count);
     }
 
-    public ObjectPool(TMono prefab, int count, Transform contrainer)
+    public GameObject GetFreeElement()
     {
-        Contrainer = contrainer;
-        _prefab = prefab;
+        if (HasFreeElement(out GameObject freeElement))
+            return freeElement;
 
-        CreatePool(count);
+        if (AutoExpand)
+            return CreateObject(true);
+
+        throw new Exception($"There is no free elements in pool of type {typeof(GameObject)}");
     }
 
-    public bool HasFreeElement(out TMono freeElement)
+    public bool HasFreeElement(out GameObject freeElement)
     {
-        foreach (var mono in _pool)
+        foreach (var poolElement in _pool)
         {
-            if (mono.gameObject.activeInHierarchy)
+            if (!poolElement.gameObject.activeInHierarchy)
             {
-                freeElement = mono;
-                mono.gameObject.SetActive(true);
+                freeElement = poolElement;
+                poolElement.gameObject.SetActive(true);
                 return true;
             }
         }
@@ -44,20 +44,9 @@ public class ObjectPool<TMono> where TMono : MonoBehaviour
         return false;
     }
 
-    public TMono GetFreeElement()
-    {
-        if (HasFreeElement(out TMono freeElement))
-            return freeElement;
-
-        if (AutoExpand)
-            return CreateObject(true);
-
-        throw new Exception($"There is no free elements in pool of type {typeof(TMono)}");
-    }
-
     private void CreatePool(int count)
     {
-        _pool = new List<TMono>();
+        _pool = new List<GameObject>();
 
         for (int i = 0; i < count; i++)
         {
@@ -65,12 +54,11 @@ public class ObjectPool<TMono> where TMono : MonoBehaviour
         }
     }
 
-    private TMono CreateObject(bool isActiveByDefault = false)
+    private GameObject CreateObject(bool isActiveByDefault = false)
     {
-        TMono createdObject = Object.Instantiate(_prefab, Contrainer);
+        GameObject createdObject = _factory.Create();
         createdObject.gameObject.SetActive(isActiveByDefault);
         _pool.Add(createdObject);
         return createdObject;
     }
 }
-*/

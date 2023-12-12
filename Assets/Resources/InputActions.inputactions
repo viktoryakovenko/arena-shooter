@@ -150,7 +150,7 @@
                 {
                     "name": "",
                     "id": "3ba993b2-7a35-4ed7-a1f2-e526be05a764",
-                    "path": "<Touchscreen>/delta",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "Mobile",

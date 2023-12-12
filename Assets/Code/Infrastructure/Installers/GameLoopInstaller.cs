@@ -7,7 +7,7 @@ using Code.Logic;
 
 namespace Code.Infrastructure.Installers
 {
-    public class GamePlayInstaller : MonoInstaller
+    public class GameLoopInstaller : MonoInstaller
     {
         [SerializeField] private Transform _startPoint;
 
@@ -23,21 +23,21 @@ namespace Code.Infrastructure.Installers
         {
             var hero = Container.Resolve<GameFactory>().CreateHero(_startPoint);
 
-            BindUIForPlayer(hero.GetComponent<IHealth>(), hero.GetComponent<IPower>());
-
             var instantiatedHero = Container.InstantiatePrefab(hero);
+
+            BindUIForPlayer(instantiatedHero.GetComponent<IHealth>(), instantiatedHero.GetComponent<IPower>());
 
             Container
                 .Bind<HeroMovement>()
                 .FromInstance(instantiatedHero.GetComponent<HeroMovement>())
                 .AsSingle()
                 .NonLazy();
-
         }
 
         private void BindUIForPlayer(IHealth health, IPower power)
         {
             var hud = Container.Resolve<GameFactory>().CreateHud(health, power);
+            Container.InstantiatePrefab(hud);
         }
 
         private void BindFactory()

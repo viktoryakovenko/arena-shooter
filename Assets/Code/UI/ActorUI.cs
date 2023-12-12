@@ -6,24 +6,20 @@ namespace Code.UI
     public class ActorUI<TState> : MonoBehaviour where TState : IUnitState 
     {
         public StatBar Bar;
+        public TState State;
 
-        private TState _state;
-
-        public void Construct(TState state)
+        private void Start()
         {
-            _state = state;
-
             UpdateBar();
-
-            _state.StateChanged += UpdateBar;
+            State.StateChanged += UpdateBar;
         }
 
         private void OnDisable()
         {
-            _state.StateChanged -= UpdateBar;
+            State.StateChanged -= UpdateBar;
         }
 
         private void UpdateBar() => 
-            Bar.SetValue(_state.Current, _state.Max);
+            Bar.SetValue(State.Current, State.Max);
     }
 }

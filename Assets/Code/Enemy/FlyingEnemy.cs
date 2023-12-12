@@ -3,6 +3,7 @@ using UnityEngine;
 
 namespace Code.Enemy
 {
+    [AddComponentMenu("Enemy/Flying")]
     public class FlyingEnemy : MonoBehaviour
     {
         [SerializeField] private float _freezeTime;

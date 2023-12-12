@@ -2,7 +2,6 @@
 using Code.StaticData;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Pool;
 using Zenject;
 using Random = UnityEngine.Random;
 
@@ -10,7 +9,7 @@ namespace Assets.Code.Logic
 {
     public class EnemySpawner : ISpawner, ITickable
     {
-        private ObjectPool<GameObject> _poolEnemies;
+        private ObjectPool _poolEnemies;
         private SpawnerStaticData _spawnerData;
         private EnemyFactory _enemyFactory;
         private List<Transform> _spawnPoints;
@@ -23,12 +22,9 @@ namespace Assets.Code.Logic
             _spawnerData = spawnerData;
             _spawnPoints = _spawnerData.SpawnPoints;
             _enemies = new List<GameObject>();
+            _spawnTime = 0;
 
-            _poolEnemies = new ObjectPool<GameObject>(createFunc: CreateEnemy, 
-                actionOnGet: GetEnemy, 
-                actionOnRelease: ReleaseEnemy, 
-                actionOnDestroy: DestroyEnemy, 
-                maxSize: _spawnerData.MaxSize);
+            _poolEnemies = new ObjectPool(_enemyFactory, _spawnerData.MaxSize);
         }
 
         public void Tick()
@@ -45,29 +41,12 @@ namespace Assets.Code.Logic
 
         public void Spawn()
         {
-            _enemies.Add(_poolEnemies.Get());
-        }
+            GameObject enemy = _poolEnemies.GetFreeElement();
 
-        private GameObject CreateEnemy()
-        {
             var randomSpawnPoint = Random.Range(0, _spawnPoints.Count);
+            enemy.transform.position = _spawnPoints[randomSpawnPoint].position;
 
-            return _enemyFactory.Create(_spawnPoints[randomSpawnPoint].position);
-        }
-
-        private void GetEnemy(GameObject enemy)
-        {
-            enemy.SetActive(true);
-        }
-
-        private void ReleaseEnemy(GameObject enemy)
-        {
-            enemy.SetActive(false);
-        }
-
-        private void DestroyEnemy(GameObject enemy)
-        {
-            Object.Destroy(enemy.gameObject);
+            _enemies.Add(enemy);
         }
     }
 }

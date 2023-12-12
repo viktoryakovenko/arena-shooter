@@ -9,12 +9,12 @@ using Random = UnityEngine.Random;
 
 namespace Code.Infrastructure.Factory
 {
-    public class EnemyFactory
+    public class EnemyFactory : IFactory
     {
         private readonly List<EnemyTypeId> _enemiesId = new List<EnemyTypeId>();
         private EnemyStaticDataService _staticData;
 
-        public EnemyFactory(EnemyStaticDataService staticData) 
+        public EnemyFactory(EnemyStaticDataService staticData)
         {
             _staticData = staticData;
             _staticData.LoadEnemies();
@@ -25,10 +25,10 @@ namespace Code.Infrastructure.Factory
                 _enemiesId.Add((EnemyTypeId)id);
         }
 
-        public GameObject Create(Vector3 spawnPosition)
+        public GameObject Create(Transform container = null)
         {
             EnemyStaticData enemyData = GetRandomEnemyData();
-            GameObject enemy = Object.Instantiate(enemyData.Prefab, spawnPosition, Quaternion.identity, null);
+            GameObject enemy = Object.Instantiate(enemyData.Prefab, container);
 
             IHealth health = enemy.GetComponent<IHealth>();
             health.Current = enemyData.Hp;

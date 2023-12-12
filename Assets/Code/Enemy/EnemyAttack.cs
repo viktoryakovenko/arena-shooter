@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace Code.Enemy
 {
+    [AddComponentMenu("Enemy/Attack")]
     public class EnemyAttack : MonoBehaviour
     {
         public float Damage { get; set; }

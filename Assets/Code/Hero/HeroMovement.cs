@@ -3,6 +3,7 @@ using Zenject;
 
 namespace Code.Hero
 {
+    [AddComponentMenu("Hero/Movement")]
     [RequireComponent(typeof(CharacterController))]
     public class HeroMovement : MonoBehaviour
     { 

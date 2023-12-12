@@ -40,12 +40,12 @@ namespace Code.Infrastructure.Factory
 
         public GameObject CreateHud(IHealth heroHealth, IPower heroPower)
         {
-            var hud = Resources.Load<GameObject>(AssetPath.HudPath);
+            GameObject hud = Resources.Load<GameObject>(AssetPath.HudPath);
 
-            hud.GetComponentInChildren<ActorHpUI>().Construct(heroHealth);
-            hud.GetComponentInChildren<ActorPowerUI>().Construct(heroPower);
+            hud.GetComponent<ActorHpUI>().State = heroHealth;
+            hud.GetComponent<ActorPowerUI>().State = heroPower;
 
-            return Object.Instantiate(hud);
+            return hud;
         }
     }
 }

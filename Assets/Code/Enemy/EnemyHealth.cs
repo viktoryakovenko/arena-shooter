@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Code.Enemy
 {
+    [AddComponentMenu("Enemy/Health")]
     public class EnemyHealth : MonoBehaviour, IHealth
     {
         public event Action StateChanged;

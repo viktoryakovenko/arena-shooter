@@ -1,9 +1,9 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using Zenject;
 
 namespace Code.Inputs
 {
+    [AddComponentMenu("Hero/Camera Rotation")]
     public class CameraRotationHandler : MonoBehaviour
     {
         [field: SerializeField] public float Sensitivity { get; set; }
@@ -21,19 +21,14 @@ namespace Code.Inputs
             _actions = actions;
         }
 
-        private void Start()
+        private void Update()
         {
-            _actions.Player.Rotation.performed += Rotate;
+            Rotate();
         }
 
-        private void OnDestroy()
+        private void Rotate()
         {
-            _actions.Player.Rotation.performed -= Rotate;
-        }
-
-        private void Rotate(InputAction.CallbackContext context)
-        {
-            var delta = context.action.ReadValue<Vector2>();
+            var delta = _actions.Player.Rotation.ReadValue<Vector2>();
             var deltaTime = Time.deltaTime;
 
             _vertical -= Sensitivity * delta.y * deltaTime;
