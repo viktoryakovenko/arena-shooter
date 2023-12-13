@@ -5,47 +5,54 @@ using Code.Logic;
 using Code.StaticData;
 using Code.UI;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Infrastructure.Factory
 {
     public class GameFactory : IGameFactory
     {
         private readonly HeroStaticData _heroData;
+        private readonly DiContainer _diContainer;
 
-        public GameFactory(HeroStaticData heroData)
+        private GameObject _hero;
+        private GameObject _hud;
+
+        public GameFactory(HeroStaticData heroData, DiContainer container)
         {
             _heroData = heroData;
+            _diContainer = container;
         }
 
         public GameObject CreateHero(Transform at)
         {
             GameObject heroGameObject = Resources.Load<GameObject>(AssetPath.HeroPath);
-            heroGameObject.transform.position = at.position;
+            _hero = _diContainer.InstantiatePrefab(heroGameObject, at.position, Quaternion.identity, null);
 
-            IHealth health = heroGameObject.GetComponent<IHealth>();
+            IHealth health = _hero.GetComponent<IHealth>();
             health.Current = _heroData.MaxHealth;
             health.Max = _heroData.MaxHealth;
 
-            IPower power = heroGameObject.GetComponent<IPower>();
+            IPower power = _hero.GetComponent<IPower>();
             power.Current = _heroData.CurrentPower;
             power.Max = _heroData.MaxPower;
 
-            heroGameObject.GetComponent<HeroAttack>().Damage = _heroData.Damage;
+            _hero.GetComponent<HeroAttack>().Damage = _heroData.Damage;
 
-            heroGameObject.GetComponent<HeroMovement>().MovementSpeed = _heroData.MoveSpeed;
-            heroGameObject.GetComponent<CameraRotationHandler>().Sensitivity = _heroData.Sensitivity;
+            _hero.GetComponent<HeroMovement>().MovementSpeed = _heroData.MoveSpeed;
+            _hero.GetComponent<CameraRotationHandler>().Sensitivity = _heroData.Sensitivity;
 
-            return heroGameObject;
+            return _hero;
         }
 
-        public GameObject CreateHud(IHealth heroHealth, IPower heroPower)
+        public GameObject CreateHud()
         {
-            GameObject hud = Resources.Load<GameObject>(AssetPath.HudPath);
+            GameObject hudGameObject = Resources.Load<GameObject>(AssetPath.HudPath);
+            _hud = _diContainer.InstantiatePrefab(hudGameObject);
 
-            hud.GetComponent<ActorHpUI>().State = heroHealth;
-            hud.GetComponent<ActorPowerUI>().State = heroPower;
+            _hud.GetComponent<ActorHpUI>().Construct(_hero.GetComponent<IHealth>());
+            _hud.GetComponent<ActorPowerUI>().Construct(_hero.GetComponent<IPower>());
 
-            return hud;
+            return _hud;
         }
     }
 }

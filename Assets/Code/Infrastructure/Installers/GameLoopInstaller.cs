@@ -3,7 +3,6 @@ using Code.StaticData;
 using UnityEngine;
 using Zenject;
 using Code.Infrastructure.Factory;
-using Code.Logic;
 
 namespace Code.Infrastructure.Installers
 {
@@ -17,27 +16,26 @@ namespace Code.Infrastructure.Installers
 
             BindFactory();
             BindPlayer();
+            BindUI();
         }
 
         private void BindPlayer()
         {
-            var hero = Container.Resolve<GameFactory>().CreateHero(_startPoint);
-
-            var instantiatedHero = Container.InstantiatePrefab(hero);
-
-            BindUIForPlayer(instantiatedHero.GetComponent<IHealth>(), instantiatedHero.GetComponent<IPower>());
+            var instantiatedHero = Container
+                .Resolve<GameFactory>()
+                .CreateHero(_startPoint);
 
             Container
                 .Bind<HeroMovement>()
                 .FromInstance(instantiatedHero.GetComponent<HeroMovement>())
-                .AsSingle()
-                .NonLazy();
+                .AsSingle();
         }
 
-        private void BindUIForPlayer(IHealth health, IPower power)
+        private void BindUI()
         {
-            var hud = Container.Resolve<GameFactory>().CreateHud(health, power);
-            Container.InstantiatePrefab(hud);
+            Container
+                .Resolve<GameFactory>()
+                .CreateHud();
         }
 
         private void BindFactory()

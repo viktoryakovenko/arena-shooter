@@ -4,5 +4,6 @@
     {
         public const string HeroPath = "Hero/Player";
         public const string HudPath = "Hud/Hud";
+        public const string BulletPath = "Bullets/Bullet";
     }
 }

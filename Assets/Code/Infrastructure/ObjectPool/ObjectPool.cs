@@ -10,11 +10,11 @@ public class ObjectPool
     private List<GameObject> _pool;
     private IFactory _factory;
 
-    public ObjectPool(IFactory factory, int count)
+    public ObjectPool(IFactory factory, string name, int count)
     {
         _factory = factory;
 
-        CreatePool(count);
+        CreatePool(count, $"[{name}]");
     }
 
     public GameObject GetFreeElement()
@@ -23,7 +23,7 @@ public class ObjectPool
             return freeElement;
 
         if (AutoExpand)
-            return CreateObject(true);
+            return CreateObject(isActiveByDefault: true);
 
         throw new Exception($"There is no free elements in pool of type {typeof(GameObject)}");
     }
@@ -44,19 +44,18 @@ public class ObjectPool
         return false;
     }
 
-    private void CreatePool(int count)
+    private void CreatePool(int count, string name)
     {
         _pool = new List<GameObject>();
+        GameObject enemyParent = new GameObject(name);
 
         for (int i = 0; i < count; i++)
-        {
-            CreateObject(); 
-        }
+            CreateObject(enemyParent.transform); 
     }
 
-    private GameObject CreateObject(bool isActiveByDefault = false)
+    private GameObject CreateObject(Transform parent = null, bool isActiveByDefault = false)
     {
-        GameObject createdObject = _factory.Create();
+        GameObject createdObject = _factory.Create(parent);
         createdObject.gameObject.SetActive(isActiveByDefault);
         _pool.Add(createdObject);
         return createdObject;

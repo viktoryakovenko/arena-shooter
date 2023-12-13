@@ -9,12 +9,15 @@ namespace Assets.Code.Logic
 {
     public class EnemySpawner : ISpawner, ITickable
     {
-        private ObjectPool _poolEnemies;
-        private SpawnerStaticData _spawnerData;
-        private EnemyFactory _enemyFactory;
-        private List<Transform> _spawnPoints;
-        private float _spawnTime;
+        private const string NAME = "Enemies";
+
+        private readonly ObjectPool _poolEnemies;
+        private readonly SpawnerStaticData _spawnerData;
+        private readonly EnemyFactory _enemyFactory;
+        private readonly List<Transform> _spawnPoints;
+
         private List<GameObject> _enemies;
+        private float _spawnTime;
 
         public EnemySpawner(EnemyFactory enemyFactory, SpawnerStaticData spawnerData)
         {
@@ -24,7 +27,7 @@ namespace Assets.Code.Logic
             _enemies = new List<GameObject>();
             _spawnTime = 0;
 
-            _poolEnemies = new ObjectPool(_enemyFactory, _spawnerData.MaxSize);
+            _poolEnemies = new ObjectPool(_enemyFactory, NAME, _spawnerData.MaxSize);
         }
 
         public void Tick()

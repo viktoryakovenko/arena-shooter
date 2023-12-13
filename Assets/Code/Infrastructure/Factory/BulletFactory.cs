@@ -1,4 +1,4 @@
-using Code.Infrastructure.Factory;
+using Code.Infrastructure.AssetManagment;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
@@ -7,18 +7,10 @@ namespace Code.Infrastructure.Factory
     {
         private GameObject _bulletPrefab;
 
-        public BulletFactory(GameObject prefab)
-        {
-            _bulletPrefab = prefab;
-        }
+        public BulletFactory() => 
+            _bulletPrefab = Resources.Load<GameObject>(AssetPath.BulletPath);
 
-        public GameObject Create(Transform container = null)
-        {
-            GameObject bullet = Object.Instantiate(_bulletPrefab, container);
-
-
-
-            return bullet;
-        }
+        public GameObject Create(Transform container = null) => 
+            Object.Instantiate(_bulletPrefab, container);
     }
 }

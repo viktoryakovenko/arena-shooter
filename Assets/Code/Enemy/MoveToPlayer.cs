@@ -12,15 +12,15 @@ namespace Code.Enemy
         private Transform _heroTransform;
 
         [Inject]
-        public void Construct(HeroMovement heroMovement) =>
-            _heroTransform = heroMovement.gameObject.transform;
+        private void Construct(HeroMovement heroMovement) =>
+            _heroTransform = heroMovement.transform;
 
         private void Update() =>
             SetDestinationForAgent();
 
         private void SetDestinationForAgent()
         {
-            //Vector3.MoveTowards(transform.position, _heroTransform.position, MoveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, _heroTransform.position, MoveSpeed * Time.deltaTime);
         }
     }
 }

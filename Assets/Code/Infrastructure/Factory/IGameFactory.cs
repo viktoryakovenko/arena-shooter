@@ -6,6 +6,6 @@ namespace Code.Infrastructure.Factory
     public interface IGameFactory
     {
         GameObject CreateHero(Transform at);
-        GameObject CreateHud(IHealth heroHealth, IPower heroPower);
+        GameObject CreateHud();
     }
 }

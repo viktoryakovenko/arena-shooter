@@ -1,6 +1,7 @@
 ﻿using System;
 using UnityEngine;
 using Code.Logic;
+using System.Collections;
 
 namespace Assets.Code.Logic
 {
@@ -8,11 +9,26 @@ namespace Assets.Code.Logic
     {
         public event Action OnHit;
 
-        public IHealth Owner => _owner;
-        public float LifetimeSeconds => _lifetimeSeconds;
+        [SerializeField] private float _lifeTime = 2f;
 
-        [SerializeField, Range(1f, 3f)] private float _lifetimeSeconds = 2f;
-        IHealth _owner;
+        private IHealth _owner;
+        private float _damage;
+
+        public void Construct(IHealth owner, float damage)
+        {
+            _owner = owner;
+            _damage = damage;
+        }
+
+        private void OnEnable()
+        {
+            StartCoroutine(LifeRoutine());
+        }
+
+        private void OnDisable()
+        {
+            StopCoroutine(LifeRoutine());
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -20,9 +36,26 @@ namespace Assets.Code.Logic
             {
                 if (health.GetType() != _owner.GetType())
                 {
-                    health.TakeDamage(50);
+                    health.TakeDamage(_damage);
+                    Deactivate();
                 }
             }
+            else
+            {
+                Deactivate();
+            }
+        }
+
+        private IEnumerator LifeRoutine()
+        {
+            yield return new WaitForSecondsRealtime(_lifeTime);
+
+            Deactivate();
+        }
+
+        private void Deactivate()
+        {
+            gameObject.SetActive(false);
         }
     }
 }
