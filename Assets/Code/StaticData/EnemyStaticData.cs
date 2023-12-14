@@ -14,10 +14,10 @@ namespace Code.StaticData
         public float MoveSpeed;
 
         [Range(0f, 50f)]
-        public int Damage;
+        public float Damage;
 
         [Range(1, 100)]
-        public int Hp;
+        public float Hp;
 
         [Min(0)]
         public int PowerPoints;

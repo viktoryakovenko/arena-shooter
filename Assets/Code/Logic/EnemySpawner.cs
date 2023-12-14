@@ -37,19 +37,25 @@ namespace Assets.Code.Logic
             _spawnTime += Time.deltaTime;
             if (_spawnTime > _spawnerData.SpawnInterval)
             {
-                Spawn();
+                Spawn(GetRandomSpawnPoint());
                 _spawnTime -= _spawnerData.SpawnInterval;
             }
         }
 
-        public void Spawn()
+        public GameObject Spawn(Vector3 spawnPoint)
         {
             GameObject enemy = _poolEnemies.GetFreeElement();
-
-            var randomSpawnPoint = Random.Range(0, _spawnPoints.Count);
-            enemy.transform.position = _spawnPoints[randomSpawnPoint].position;
+            enemy.transform.position = spawnPoint;
 
             _enemies.Add(enemy);
+
+            return enemy;
+        }
+
+        private Vector3 GetRandomSpawnPoint()
+        {
+            int randomId = Random.Range(0, _spawnPoints.Count);
+            return _spawnPoints[randomId].position;
         }
     }
 }

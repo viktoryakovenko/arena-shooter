@@ -1,6 +1,5 @@
 ﻿using Assets.Code.Logic;
 using Code.Infrastructure.Factory;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Code.Logic
@@ -8,30 +7,25 @@ namespace Code.Logic
     public class BulletSpawner : ISpawner
     {
         private const string NAME = "Bullets";
-        private const int MAX = 200;
+        private const int MAX = 50;
 
-        private readonly Transform _spawnPoint;
         private readonly ObjectPool _poolBullets;
         private readonly BulletFactory _bulletFactory;
-
-        private List<GameObject> _bullets;
 
         public BulletSpawner(BulletFactory bulletFactory)
         {
             _bulletFactory = bulletFactory;
-            _bullets = new List<GameObject>();
 
             _poolBullets = new ObjectPool(_bulletFactory, NAME, MAX);
             _poolBullets.AutoExpand = true;
         }
 
-        public void Spawn()
+        public GameObject Spawn(Vector3 spawnPoint)
         {
             GameObject bullet = _poolBullets.GetFreeElement();
+            bullet.transform.position = spawnPoint;
 
-            bullet.transform.position = _spawnPoint.position;
-
-            _bullets.Add(bullet);
+            return bullet;
         }
     }
 }

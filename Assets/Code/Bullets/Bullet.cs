@@ -1,10 +1,12 @@
 ﻿using System;
 using UnityEngine;
-using Code.Logic;
 using System.Collections;
+using Code.Bullets;
 
-namespace Assets.Code.Logic
+namespace Code.Logic
 {
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(MoveForward))]
     public class Bullet : MonoBehaviour
     {
         public event Action OnHit;
@@ -17,7 +19,7 @@ namespace Assets.Code.Logic
         public void Construct(IHealth owner, float damage)
         {
             _owner = owner;
-            _damage = damage;
+            _damage = damage;            
         }
 
         private void OnEnable()
@@ -30,9 +32,9 @@ namespace Assets.Code.Logic
             StopCoroutine(LifeRoutine());
         }
 
-        private void OnTriggerEnter2D(Collider2D other)
+        private void OnCollisionEnter(Collision collision)
         {
-            if (other.gameObject.TryGetComponent(out IHealth health))
+            if (collision.gameObject.TryGetComponent(out IHealth health))
             {
                 if (health.GetType() != _owner.GetType())
                 {

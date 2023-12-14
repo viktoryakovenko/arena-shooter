@@ -6,36 +6,43 @@ using Zenject;
 namespace Code.Hero
 {
     [AddComponentMenu("Hero/Attack")]
-    public class HeroAttack : MonoBehaviour
+    [RequireComponent(typeof(Gun))]
+    public class HeroAttack : MonoBehaviour, IAttack
     {
-        public float Damage;
+        public float Damage { get; set; }
 
         private InputActions _actions;
+        private Gun _gun;
 
         [Inject]
         private void Construct(InputActions actions)
         {
             _actions = actions;
+            _gun = GetComponent<Gun>();
         }
 
         private void OnEnable()
         {
             _actions.Enable();
-            _actions.Player.Fire.started += Attack;
+            _actions.Player.Fire.started += Fire;
             _actions.Player.Fire2.started += Ultimate;
         }
 
         private void OnDisable()
         {
             _actions.Disable();
-            _actions.Player.Fire.started -= Attack;
+            _actions.Player.Fire.started -= Fire;
             _actions.Player.Fire2.started -= Ultimate;
         }
 
-        private void Attack(InputAction.CallbackContext context)
+        public void Attack()
         {
-            var health = GetComponent<IHealth>();
-            health.TakeDamage(Damage);
+            _gun.Shoot();
+        }
+
+        private void Fire(InputAction.CallbackContext context)
+        {
+            Attack();
         }
 
         private void Ultimate(InputAction.CallbackContext context)

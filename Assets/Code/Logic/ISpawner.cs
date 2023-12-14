@@ -4,6 +4,6 @@ namespace Assets.Code.Logic
 {
     public interface ISpawner
     {
-        void Spawn();
+        GameObject Spawn(Vector3 spawnPoint);
     }
 }

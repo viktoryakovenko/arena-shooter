@@ -46,7 +46,7 @@ namespace Code.Infrastructure.Factory
 
             enemy.GetComponent<MoveToPlayer>().MoveSpeed = enemyData.MoveSpeed;
 
-            enemy.GetComponent<EnemyAttack>().Damage = enemyData.Damage;
+            enemy.GetComponent<DamageOnCollision>()?.Construct(enemyData.Damage);
 
             return enemy;
         }

@@ -1,4 +1,4 @@
-using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 
 namespace Code.Enemy
@@ -11,20 +11,21 @@ namespace Code.Enemy
 
         private void Start()
         {
-            transform
-                .DOMoveY(transform.position.y + _flyHeight, 0.01f)
-                .SetSpeedBased()
-                .SetEase(Ease.Linear)
-                .OnComplete(Wait);
 
         }
 
-        private void Wait()
+        private IEnumerator FlyRoutine()
         {
-            DOTween
-                .Sequence()
-                .SetDelay(_freezeTime)
-                .OnComplete(() => Destroy(this));
+            //var aimY = transform.position.y + _flyHeight;
+            //Vector3 endPoint = aimY;
+            yield return null;
+
+            StartCoroutine(WaitRoutine());
+        }
+
+        private IEnumerator WaitRoutine()
+        {
+            yield return new WaitForSecondsRealtime(_freezeTime);
         }
     }
 }

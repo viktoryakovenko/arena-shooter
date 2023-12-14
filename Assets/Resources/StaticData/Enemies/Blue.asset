@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Blue
   m_EditorClassIdentifier: 
   EnemyTypeId: 0
-  SpawnWeight: 10
+  SpawnWeight: 1
   MoveSpeed: 0.5
   Damage: 25
   Hp: 100

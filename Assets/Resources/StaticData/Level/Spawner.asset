@@ -23,4 +23,4 @@ MonoBehaviour:
   - {fileID: 1928215844226871928, guid: 297d9c60645e5c447a9cd2dd85e39129, type: 3}
   SpawnInterval: 6
   MaxSpawnInterval: 10
-  MaxSize: 3
+  MaxSize: 30
