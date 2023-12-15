@@ -14,7 +14,6 @@ namespace Code.Enemy
 
         private void OnCollisionEnter(Collision other)
         {
-            Debug.Log("Collision!");
             if (other.gameObject.TryGetComponent(out HeroHealth health))
             {
                 health.TakeDamage(_damage);

@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: HeroData
   m_EditorClassIdentifier: 
   Sensitivity: 75
-  MoveSpeed: 1
+  MoveSpeed: 0.75
   MaxHealth: 100
-  Damage: 50
+  Damage: 25
   MaxPower: 100
   CurrentPower: 50

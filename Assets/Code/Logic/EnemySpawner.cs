@@ -5,7 +5,7 @@ using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
 
-namespace Assets.Code.Logic
+namespace Code.Logic
 {
     public class EnemySpawner : ISpawner, ITickable
     {
@@ -46,6 +46,8 @@ namespace Assets.Code.Logic
         {
             GameObject enemy = _poolEnemies.GetFreeElement();
             enemy.transform.position = spawnPoint;
+            var health = enemy.GetComponent<IHealth>();
+            health.Current = health.Max;
 
             _enemies.Add(enemy);
 

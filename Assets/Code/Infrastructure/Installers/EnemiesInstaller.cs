@@ -1,4 +1,4 @@
-using Assets.Code.Logic;
+using Code.Logic;
 using Code.Infrastructure.Factory;
 using Code.StaticData;
 using UnityEngine;

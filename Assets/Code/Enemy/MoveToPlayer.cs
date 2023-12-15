@@ -20,7 +20,8 @@ namespace Code.Enemy
 
         private void SetDestinationForAgent()
         {
-            transform.position = Vector3.MoveTowards(transform.position, _heroTransform.position, MoveSpeed * Time.deltaTime);
+            if (_heroTransform != null) 
+                transform.position = Vector3.MoveTowards(transform.position, _heroTransform.position, MoveSpeed * Time.deltaTime);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using Code.Bullets;
 
@@ -9,8 +8,6 @@ namespace Code.Logic
     [RequireComponent(typeof(MoveForward))]
     public class Bullet : MonoBehaviour
     {
-        public event Action OnHit;
-
         [SerializeField] private float _lifeTime = 2f;
 
         private IHealth _owner;
@@ -30,6 +27,22 @@ namespace Code.Logic
         private void OnDisable()
         {
             StopCoroutine(LifeRoutine());
+        }
+
+        private void OnTriggerEnter(Collider collider)
+        {
+            if (collider.TryGetComponent(out IHealth health))
+            {
+                if (health.GetType() != _owner.GetType())
+                {
+                    health.TakeDamage(_damage);
+                    Deactivate();
+                }
+            }
+            else
+            {
+                Deactivate();
+            }
         }
 
         private void OnCollisionEnter(Collision collision)

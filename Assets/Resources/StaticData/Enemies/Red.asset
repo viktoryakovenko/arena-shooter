@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnemyTypeId: 10
   SpawnWeight: 4
-  MoveSpeed: 2
+  MoveSpeed: 1
   Damage: 15
   Hp: 50
   PowerPoints: 15

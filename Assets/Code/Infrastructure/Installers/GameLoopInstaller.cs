@@ -16,7 +16,6 @@ namespace Code.Infrastructure.Installers
 
             BindFactory();
             BindPlayer();
-            BindUI();
         }
 
         private void BindPlayer()
@@ -29,13 +28,6 @@ namespace Code.Infrastructure.Installers
                 .Bind<HeroMovement>()
                 .FromInstance(instantiatedHero.GetComponent<HeroMovement>())
                 .AsSingle();
-        }
-
-        private void BindUI()
-        {
-            Container
-                .Resolve<GameFactory>()
-                .CreateHud();
         }
 
         private void BindFactory()

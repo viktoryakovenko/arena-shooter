@@ -11,6 +11,9 @@ namespace Code.StaticData
         [Range(1f, 10f)]
         public float SpawnInterval;
 
+        [Range(0.5f, 2f)]
+        public float TimeStep;
+
         [Range(1f, 10f)]
         public float MaxSpawnInterval;
 

@@ -30,5 +30,10 @@ namespace Code.Enemy
 
             StateChanged?.Invoke();
         }
+
+        public void Clear()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

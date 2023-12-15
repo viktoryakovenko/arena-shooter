@@ -21,6 +21,7 @@ MonoBehaviour:
   - {fileID: 4016015029411666984, guid: 2c47aa0220fd03441b25406d4cf83d18, type: 3}
   - {fileID: 2391578792707454555, guid: 65d887bc6058e5f4fb3022fa8e6a9888, type: 3}
   - {fileID: 1928215844226871928, guid: 297d9c60645e5c447a9cd2dd85e39129, type: 3}
-  SpawnInterval: 6
+  SpawnInterval: 2
+  TimeStep: 0
   MaxSpawnInterval: 10
   MaxSize: 30

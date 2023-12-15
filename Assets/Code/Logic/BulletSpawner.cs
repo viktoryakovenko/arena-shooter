@@ -1,5 +1,4 @@
-﻿using Assets.Code.Logic;
-using Code.Infrastructure.Factory;
+﻿using Code.Infrastructure.Factory;
 using UnityEngine;
 
 namespace Code.Logic

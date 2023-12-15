@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Code.Logic
+namespace Code.Logic
 {
     public interface ISpawner
     {

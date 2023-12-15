@@ -10,7 +10,7 @@ namespace Code.StaticData
         [Range(1, 10)]
         public int SpawnWeight;
 
-        [Range(0.5f, 5.0f)]
+        [Range(0.1f, 5.0f)]
         public float MoveSpeed;
 
         [Range(0f, 50f)]
