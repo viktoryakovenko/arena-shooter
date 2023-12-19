@@ -1,22 +1,21 @@
 ﻿using UnityEngine;
 using System.Collections;
-using Code.Bullets;
+using Code.Logic;
 
-namespace Code.Logic
+namespace Code.Bullets
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(MoveForward))]
-    public class Bullet : MonoBehaviour
+    public abstract class Bullet : MonoBehaviour
     {
         [SerializeField] private float _lifeTime = 2f;
 
-        private IHealth _owner;
-        private float _damage;
+        protected IHealth _owner;
+        protected float _damage;
 
         public void Construct(IHealth owner, float damage)
         {
             _owner = owner;
-            _damage = damage;            
+            _damage = damage;
         }
 
         private void OnEnable()
@@ -29,38 +28,6 @@ namespace Code.Logic
             StopCoroutine(LifeRoutine());
         }
 
-        private void OnTriggerEnter(Collider collider)
-        {
-            if (collider.TryGetComponent(out IHealth health))
-            {
-                if (health.GetType() != _owner.GetType())
-                {
-                    health.TakeDamage(_damage);
-                    Deactivate();
-                }
-            }
-            else
-            {
-                Deactivate();
-            }
-        }
-
-        private void OnCollisionEnter(Collision collision)
-        {
-            if (collision.gameObject.TryGetComponent(out IHealth health))
-            {
-                if (health.GetType() != _owner.GetType())
-                {
-                    health.TakeDamage(_damage);
-                    Deactivate();
-                }
-            }
-            else
-            {
-                Deactivate();
-            }
-        }
-
         private IEnumerator LifeRoutine()
         {
             yield return new WaitForSecondsRealtime(_lifeTime);
@@ -68,7 +35,7 @@ namespace Code.Logic
             Deactivate();
         }
 
-        private void Deactivate()
+        protected void Deactivate()
         {
             gameObject.SetActive(false);
         }

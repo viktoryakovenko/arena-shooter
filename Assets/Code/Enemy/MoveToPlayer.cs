@@ -7,7 +7,7 @@ namespace Code.Enemy
     [AddComponentMenu("Enemy/Move To Player")]
     public class MoveToPlayer : MonoBehaviour
     {
-        public float MoveSpeed { get; set; }
+        [field: SerializeField] public float MoveSpeed { get; set; }
 
         private Transform _heroTransform;
 

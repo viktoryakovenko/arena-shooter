@@ -110,6 +110,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6075483899771994914, guid: 0558f9976d8cd4146b0f1fa98dac3623, type: 3}
+      propertyPath: <MoveSpeed>k__BackingField
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7089399884110402214, guid: 0558f9976d8cd4146b0f1fa98dac3623, type: 3}
       propertyPath: m_Name
       value: Red

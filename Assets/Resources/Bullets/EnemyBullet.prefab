@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 4302474675103670673}
   - component: {fileID: 1891834759785082786}
   - component: {fileID: 3377575221728702814}
-  - component: {fileID: 7488989339040025014}
-  - component: {fileID: -1331592640385303327}
+  - component: {fileID: 1133579246714391800}
+  - component: {fileID: 6372114443642710301}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: EnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -84,7 +84,7 @@ SphereCollider:
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7488989339040025014
+--- !u!114 &1133579246714391800
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -93,11 +93,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 4690156991219986102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fae6d5ebf0778b43a22ea6bd97a0912, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ce0951dff1ded34e8d57dcb8d3e4932, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _lifeTime: 2
---- !u!114 &-1331592640385303327
+--- !u!114 &6372114443642710301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,10 +106,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4690156991219986102}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a768020dadd388449b5a8bf4e097e0fb, type: 3}
+  m_Script: {fileID: 11500000, guid: 472fc362577a1ab43a4fafbea229a6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _moveSpeed: 2
+  <MoveSpeed>k__BackingField: 2
 --- !u!1 &5640796247378765245
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,7 +171,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 8f05751f77bc9ba4e8261bd8f356e88b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

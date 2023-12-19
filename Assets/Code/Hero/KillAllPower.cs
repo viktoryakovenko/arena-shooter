@@ -32,14 +32,14 @@ namespace Code.Hero
             set => _maxPower = value;
         }
 
-        public void AddPower(int amount)
+        public void AddPower(float amount)
         {
             if (Current <= 0) return;
 
             Current += amount;
         }
 
-        public void RemovePower(int amount)
+        public void RemovePower(float amount)
         {
             if (Current <= 0) return;
 

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Code.Bullets;
+using UnityEngine;
 using Zenject;
 
 namespace Code.Logic
@@ -8,13 +9,13 @@ namespace Code.Logic
     public class Gun : MonoBehaviour
     {
         [SerializeField] private Transform _bulletSpawnPoint;
+        [SerializeField] private Bullet _bullet;
 
         private BulletSpawner _bulletSpawner;
 
-        [Inject]
-        private void Construct(BulletSpawner bulletSpawner)
+        private void Awake()
         {
-            _bulletSpawner = bulletSpawner;
+            _bulletSpawner = new BulletSpawner(_bullet);
         }
 
         public void Shoot()

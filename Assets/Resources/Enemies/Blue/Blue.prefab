@@ -25,9 +25,9 @@ Transform:
   m_GameObject: {fileID: 7074208824052085866}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.4, z: 0.75}
-  m_LocalScale: {x: 3.1938677, y: 3.1938677, z: 3.1938677}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0, z: 0.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 2836945468263018065}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -153,6 +153,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6075483899771994914, guid: 0558f9976d8cd4146b0f1fa98dac3623, type: 3}
+      propertyPath: <MoveSpeed>k__BackingField
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 7089399884110402214, guid: 0558f9976d8cd4146b0f1fa98dac3623, type: 3}
       propertyPath: m_Name
       value: Blue
@@ -183,6 +187,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7089399884110402214, guid: 0558f9976d8cd4146b0f1fa98dac3623, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5412555031649261042}
+    - targetCorrespondingSourceObject: {fileID: 7089399884110402214, guid: 0558f9976d8cd4146b0f1fa98dac3623, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 205056404199046788}
   m_SourcePrefab: {fileID: 100100000, guid: 0558f9976d8cd4146b0f1fa98dac3623, type: 3}
 --- !u!4 &2836945468263018065 stripped
 Transform:
@@ -270,3 +277,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpawnPoint: {fileID: 3000983527954767992}
+  _bullet: {fileID: 1133579246714391800, guid: 5d64480438015b243a8eb4edf8460bee, type: 3}
+--- !u!114 &205056404199046788
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6071047450864795913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93b912f493180014ca475b19d6f8341b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 5

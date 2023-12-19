@@ -2,6 +2,7 @@
 {
     public interface IPower : IUnitState
     {
-        void AddPower(int amount);
+        void AddPower(float amount);
+        void RemovePower(float amount);
     }
 }

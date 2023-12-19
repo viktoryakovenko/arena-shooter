@@ -1,16 +1,16 @@
-using Code.Infrastructure.AssetManagment;
+using Code.Bullets;
 using UnityEngine;
 
 namespace Code.Infrastructure.Factory
 {
     public class BulletFactory : IFactory
     {
-        private GameObject _bulletPrefab;
+        private Bullet _bulletPrefab;
 
-        public BulletFactory() => 
-            _bulletPrefab = Resources.Load<GameObject>(AssetPath.BulletPath);
+        public BulletFactory(Bullet bullet) => 
+            _bulletPrefab = bullet;
 
         public GameObject Create(Transform container = null) => 
-            Object.Instantiate(_bulletPrefab, container);
+            Object.Instantiate(_bulletPrefab.gameObject, container);
     }
 }

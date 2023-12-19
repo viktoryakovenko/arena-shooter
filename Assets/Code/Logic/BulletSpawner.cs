@@ -1,4 +1,5 @@
-﻿using Code.Infrastructure.Factory;
+﻿using Code.Bullets;
+using Code.Infrastructure.Factory;
 using UnityEngine;
 
 namespace Code.Logic
@@ -6,14 +7,14 @@ namespace Code.Logic
     public class BulletSpawner : ISpawner
     {
         private const string NAME = "Bullets";
-        private const int MAX = 50;
+        private const int MAX = 20;
 
         private readonly ObjectPool _poolBullets;
         private readonly BulletFactory _bulletFactory;
 
-        public BulletSpawner(BulletFactory bulletFactory)
+        public BulletSpawner(Bullet bullet)
         {
-            _bulletFactory = bulletFactory;
+            _bulletFactory = new BulletFactory(bullet);
 
             _poolBullets = new ObjectPool(_bulletFactory, NAME, MAX);
             _poolBullets.AutoExpand = true;

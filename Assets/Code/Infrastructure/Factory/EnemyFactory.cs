@@ -3,7 +3,6 @@ using Code.Logic;
 using Code.StaticData;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -44,7 +43,11 @@ namespace Code.Infrastructure.Factory
             health.Current = enemyData.Hp;
             health.Max = enemyData.Hp;
 
-            enemy.GetComponent<MoveToPlayer>().MoveSpeed = enemyData.MoveSpeed;
+            if (enemy.TryGetComponent<IAttack>(out var attack))
+                attack.Damage = enemyData.Damage;
+
+            var move = enemy.GetComponent<MoveToPlayer>();
+            move.MoveSpeed = enemyData.MoveSpeed;
 
             enemy.GetComponent<DamageOnCollision>()?.Construct(enemyData.Damage);
 

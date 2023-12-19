@@ -950,7 +950,6 @@ GameObject:
   - component: {fileID: 1365226209}
   - component: {fileID: 1365226211}
   - component: {fileID: 1365226212}
-  - component: {fileID: 1365226213}
   - component: {fileID: 1365226215}
   - component: {fileID: 1365226214}
   m_Layer: 0
@@ -974,7 +973,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _scriptableObjectInstallers: []
   _monoInstallers:
-  - {fileID: 1365226213}
   - {fileID: 1365226212}
   - {fileID: 1365226211}
   - {fileID: 1365226215}
@@ -1036,19 +1034,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _spawnerStaticData: {fileID: 11400000, guid: fdc1f857d5b3bbf40beba4c87348dc69, type: 2}
---- !u!114 &1365226213
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1365226207}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4cbf30500ab8c9246b843348e2fd32b8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _bulletPrefab: {fileID: 4690156991219986102, guid: 5d5f34b56e7e03842b17049ea044934b, type: 3}
 --- !u!114 &1365226214
 MonoBehaviour:
   m_ObjectHideFlags: 0
