@@ -34,6 +34,7 @@ namespace Code.Infrastructure.Factory
             FindEnemiesWeight(enemiesId);
         }
 
+        // TODO: Add Builder
         public GameObject Create(Transform container = null)
         {
             EnemyStaticData enemyData = GetRandomEnemyData();
@@ -42,6 +43,8 @@ namespace Code.Infrastructure.Factory
             IHealth health = enemy.GetComponent<IHealth>();
             health.Current = enemyData.Hp;
             health.Max = enemyData.Hp;
+
+            enemy.GetComponent<PowerForKill>().PowerPoints = enemyData.PowerPoints;
 
             if (enemy.TryGetComponent<IAttack>(out var attack))
                 attack.Damage = enemyData.Damage;

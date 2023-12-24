@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Code.Hero
 {
-    [AddComponentMenu("Hero/KillAll Power")]
-    public class KillAllPower : MonoBehaviour, IPower
+    [AddComponentMenu("Hero/HeroPower")]
+    public class HeroPower : MonoBehaviour, IPower
     {
         public event Action StateChanged;
 
@@ -34,16 +34,16 @@ namespace Code.Hero
 
         public void AddPower(float amount)
         {
-            if (Current <= 0) return;
+            if (amount <= 0) return;
 
-            Current += amount;
+            Current = Mathf.Min(Current + amount, _maxPower);
         }
 
         public void RemovePower(float amount)
         {
-            if (Current <= 0) return;
+            if (amount <= 0) return;
 
-            Current -= amount;
+            Current = Mathf.Max(Current - amount, 0);
         }
     }
 }

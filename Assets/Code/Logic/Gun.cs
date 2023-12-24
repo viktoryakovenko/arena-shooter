@@ -13,9 +13,10 @@ namespace Code.Logic
 
         private BulletSpawner _bulletSpawner;
 
-        private void Awake()
+        [Inject]
+        private void Construct(DiContainer container)
         {
-            _bulletSpawner = new BulletSpawner(_bullet);
+            _bulletSpawner = new BulletSpawner(_bullet, container);
         }
 
         public void Shoot()

@@ -9,9 +9,9 @@ namespace Code.Bullets
         {
             if (collider.TryGetComponent(out IHealth health))
             {
-                if (health.GetType() != _owner.GetType())
+                if (health.GetType() != Owner.GetType())
                 {
-                    health.TakeDamage(_damage);
+                    health.TakeDamage(Damage);
                     Deactivate();
                 }
             }

@@ -47,10 +47,10 @@ public class ObjectPool
     private void CreatePool(int count, string name)
     {
         _pool = new List<GameObject>();
-        GameObject enemyParent = new GameObject(name);
+        GameObject parent = new GameObject(name);
 
         for (int i = 0; i < count; i++)
-            CreateObject(enemyParent.transform); 
+            CreateObject(parent.transform); 
     }
 
     private GameObject CreateObject(Transform parent = null, bool isActiveByDefault = false)

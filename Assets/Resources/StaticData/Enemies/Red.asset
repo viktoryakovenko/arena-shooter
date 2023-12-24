@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Red
   m_EditorClassIdentifier: 
   EnemyTypeId: 10
-  SpawnWeight: 1
+  SpawnWeight: 4
   MoveSpeed: 1
   Damage: 15
   Hp: 50

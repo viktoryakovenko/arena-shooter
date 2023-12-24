@@ -1,6 +1,7 @@
 ﻿using Code.Bullets;
 using Code.Infrastructure.Factory;
 using UnityEngine;
+using Zenject;
 
 namespace Code.Logic
 {
@@ -12,9 +13,9 @@ namespace Code.Logic
         private readonly ObjectPool _poolBullets;
         private readonly BulletFactory _bulletFactory;
 
-        public BulletSpawner(Bullet bullet)
+        public BulletSpawner(Bullet bullet, DiContainer container)
         {
-            _bulletFactory = new BulletFactory(bullet);
+            _bulletFactory = new BulletFactory(bullet, container);
 
             _poolBullets = new ObjectPool(_bulletFactory, NAME, MAX);
             _poolBullets.AutoExpand = true;

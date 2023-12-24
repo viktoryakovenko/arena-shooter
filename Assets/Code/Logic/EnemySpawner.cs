@@ -15,24 +15,25 @@ namespace Code.Logic
         private readonly SpawnerStaticData _spawnerData;
         private readonly EnemyFactory _enemyFactory;
         private readonly List<Transform> _spawnPoints;
+        private readonly EnemyCollection _enemyCollection;
 
-        private List<GameObject> _enemies;
         private float _spawnTime;
 
-        public EnemySpawner(EnemyFactory enemyFactory, SpawnerStaticData spawnerData)
+        public EnemySpawner(EnemyFactory enemyFactory, EnemyCollection enemyCollection, SpawnerStaticData spawnerData)
         {
             _enemyFactory = enemyFactory;
             _spawnerData = spawnerData;
-            _spawnPoints = _spawnerData.SpawnPoints;
-            _enemies = new List<GameObject>();
-            _spawnTime = 0;
+            _enemyCollection = enemyCollection;
 
             _poolEnemies = new ObjectPool(_enemyFactory, NAME, _spawnerData.MaxSize);
+
+            _spawnPoints = _spawnerData.SpawnPoints;
+            _spawnTime = 0;
         }
 
         public void Tick()
         {
-            if (_enemies.Count >= _spawnerData.MaxSize) return;
+            if (_enemyCollection.Count >= _spawnerData.MaxSize) return;
 
             _spawnTime += Time.deltaTime;
             if (_spawnTime > _spawnerData.SpawnInterval)
@@ -49,7 +50,7 @@ namespace Code.Logic
             var health = enemy.GetComponent<IHealth>();
             health.Current = health.Max;
 
-            _enemies.Add(enemy);
+            _enemyCollection.AddEnemy(enemy);
 
             return enemy;
         }

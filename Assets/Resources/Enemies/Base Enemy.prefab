@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6075483899771994914}
   - component: {fileID: -2393205007708061372}
   - component: {fileID: -2758489527396011447}
+  - component: {fileID: -1767649743765143592}
   m_Layer: 6
   m_Name: Base Enemy
   m_TagString: Untagged
@@ -61,6 +62,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 472fc362577a1ab43a4fafbea229a6f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  <MoveSpeed>k__BackingField: 0
 --- !u!114 &-2393205007708061372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -86,3 +88,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b361e4e95f8c8974bb8430d40b5fbde0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-1767649743765143592
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7089399884110402214}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c34a2d4fa1f58f4b8b0f3c7458a658c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PowerPoints: 0

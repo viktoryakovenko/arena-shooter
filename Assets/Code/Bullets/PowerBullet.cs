@@ -9,7 +9,7 @@ namespace Code.Bullets
         {
             if (collider.TryGetComponent(out IPower power))
             {
-                power.RemovePower(_damage);
+                power.RemovePower(Damage);
                 Deactivate();
             }
             else

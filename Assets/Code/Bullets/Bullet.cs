@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using Code.Logic;
 
 namespace Code.Bullets
@@ -7,32 +6,16 @@ namespace Code.Bullets
     [RequireComponent(typeof(Rigidbody))]
     public abstract class Bullet : MonoBehaviour
     {
-        [SerializeField] private float _lifeTime = 2f;
+        public IHealth Owner => _owner;
+        public float Damage => _damage;
 
-        protected IHealth _owner;
-        protected float _damage;
+        private IHealth _owner;
+        private float _damage;
 
         public void Construct(IHealth owner, float damage)
         {
             _owner = owner;
             _damage = damage;
-        }
-
-        private void OnEnable()
-        {
-            StartCoroutine(LifeRoutine());
-        }
-
-        private void OnDisable()
-        {
-            StopCoroutine(LifeRoutine());
-        }
-
-        private IEnumerator LifeRoutine()
-        {
-            yield return new WaitForSecondsRealtime(_lifeTime);
-
-            Deactivate();
         }
 
         protected void Deactivate()

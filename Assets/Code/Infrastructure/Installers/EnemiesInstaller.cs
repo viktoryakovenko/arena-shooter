@@ -15,6 +15,7 @@ namespace Code.Infrastructure.Installers
             Container.Bind<EnemyStaticDataService>().AsSingle();
 
             Container.Bind<EnemyFactory>().AsSingle();
+            Container.Bind<EnemyCollection>().AsSingle();
 
             Container.Bind<SpawnerStaticData>().FromInstance(_spawnerStaticData);
 

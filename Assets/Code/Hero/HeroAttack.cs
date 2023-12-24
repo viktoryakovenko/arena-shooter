@@ -1,3 +1,4 @@
+using Code.Hero.Skills;
 using Code.Logic;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -13,24 +14,28 @@ namespace Code.Hero
 
         private InputActions _actions;
         private Gun _gun;
+        private ISkill _skill;
 
         [Inject]
         private void Construct(InputActions actions)
         {
             _actions = actions;
+        }
+
+        private void Start()
+        {
             _gun = GetComponent<Gun>();
+            _skill = GetComponent<ISkill>();
         }
 
         private void OnEnable()
         {
-            _actions.Enable();
             _actions.Player.Fire.started += Fire;
             _actions.Player.Fire2.started += Ultimate;
         }
 
         private void OnDisable()
         {
-            _actions.Disable();
             _actions.Player.Fire.started -= Fire;
             _actions.Player.Fire2.started -= Ultimate;
         }
@@ -47,7 +52,7 @@ namespace Code.Hero
 
         private void Ultimate(InputAction.CallbackContext context)
         {
-            Debug.Log("Ultimate!");
+            _skill.Use();
         }
     }
 }

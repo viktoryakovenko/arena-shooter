@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Code.UI
 {
-    public class GameOver : MonoBehaviour
+    public class GameOverMenu : MonoBehaviour
     {
         [SerializeField] private TextMeshProUGUI _scoreText;
         [SerializeField] private Button _restartButton;
